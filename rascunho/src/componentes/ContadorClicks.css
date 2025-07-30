@@ -1,0 +1,25 @@
+.contador-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+.btn-incrementar.ativo {
+  color: white;
+  border-color: #4caf50;
+}
+
+.btn-decrementar.ativo {
+  color: white;
+  border-color: #f44336;
+}
