@@ -1,0 +1,148 @@
+import { useState } from "react"; 
+// Importa o hook useState do React para gerenciar estado no componente
+
+export default function Input() {
+  // Declara o componente funcional chamado Input
+
+  const [email, setEmail] = useState(""); 
+  // Declara estado 'email' para armazenar o valor do input de e-mail, inicializado vazio
+  // setEmail é a função para atualizar esse estado
+
+  const [inputNumber, setInputNumber] = useState(""); 
+  // Declara estado 'inputNumber' para armazenar o valor do input de número, também vazio inicialmente
+  // setInputNumber atualiza esse estado
+
+  const [bgColor, setBgColor] = useState("#fff"); 
+  // Declara estado 'bgColor' que controla a cor de fundo da div principal, inicialmente branco (#fff)
+  // setBgColor atualiza essa cor
+
+  // Mapeamento de números para cores específicas em formato hexadecimal
+  const colorMap = {
+    1: "#1caf80",
+    2: "#2caf70",
+    3: "#3caf50",
+    4: "#4caf40",
+    5: "#5caf20",
+    6: "#6caf30",
+  };
+
+  // Função chamada quando o formulário é enviado
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    // Prevê o comportamento padrão do formulário (que é recarregar a página)
+
+    // Pega o primeiro caractere digitado no campo número, após remover espaços em branco nas pontas
+    const firstDigit = inputNumber.trim().charAt(0);
+
+    // Procura a cor correspondente no objeto colorMap pelo primeiro dígito
+    // Se não encontrar, usa branco como padrão
+    const newColor = colorMap[firstDigit] || "#fff";
+
+    // Atualiza o estado bgColor com a nova cor para mudar o fundo
+    setBgColor(newColor);
+  };
+
+  return (
+    // Retorna o JSX que será renderizado na tela
+    <div
+      style={{
+        padding: "50px",          // Espaço interno ao redor do conteúdo
+        height: "200px",          // Altura fixa para o container
+        backgroundColor: bgColor, // Cor de fundo que muda conforme estado bgColor
+        transition: "background-color 0.5s" // Animação suave na mudança de cor
+      }}
+    >
+      <form onSubmit={handleSubmit}>
+        {/* Input para email */}
+        <input
+          type="email"                   // Tipo e-mail (validação automática)
+          placeholder="Digite seu email"// Texto de dica no input
+          value={email}                 // Valor controlado pelo estado 'email'
+          onChange={(e) => setEmail(e.target.value)} // Atualiza estado 'email' ao digitar
+          required                      // Campo obrigatório
+        />
+        <br />
+        {/* Input para número */}
+        <input
+          type="text"                    // Tipo texto para poder pegar números e evitar problemas com número "vazio"
+          value={inputNumber}            // Valor controlado pelo estado 'inputNumber'
+          onChange={(e) => setInputNumber(e.target.value)} // Atualiza estado 'inputNumber' ao digitar
+          placeholder="Digite algum número." // Texto de dica
+          required                      // Campo obrigatório
+        />
+        <br />
+        <br />
+        {/* Botão para enviar o formulário */}
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  );
+}
+ 
+/* App.css básico */
+
+/* Remove a margem padrão do navegador e define a fonte do corpo da página */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff; /* cor branca de fundo */
+}
+
+/* Define padding e altura para qualquer div, igual ao style inline do React */
+div {
+  padding: 50px;
+  height: 200px;
+}
+
+/* Estilo do formulário: fundo branco, espaçamento interno e borda arredondada */
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  /* Sombra leve para dar profundidade */
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  width: 300px; /* largura fixa para o formulário */
+}
+
+/* Estilo geral dos inputs (email e texto) */
+input {
+  width: 100%; /* ocupa toda largura do formulário */
+  padding: 8px; /* espaço interno para digitar confortável */
+  margin-top: 8px; /* distância do elemento acima */
+  margin-bottom: 12px; /* distância do elemento abaixo */
+  border: 1px solid #ccc; /* borda cinza clara */
+  border-radius: 4px; /* cantos arredondados */
+}
+
+/* Estilo do botão enviar */
+button {
+  padding: 10px; /* espaçamento interno do botão */
+  width: 100%; /* botão ocupa toda largura do formulário */
+  background-color: #1caf80; /* verde médio */
+  color: white; /* texto branco */
+  border: none; /* tira borda padrão */
+  border-radius: 4px; /* cantos arredondados */
+  cursor: pointer; /* muda cursor para mãozinha ao passar em cima */
+}
+
+/* Estilo do botão quando o usuário passa o mouse */
+button:hover {
+  background-color: #178f63; /* verde mais escuro no hover */
+}
+ 
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import Input from './componentes/Input.jsx'  
+
+function App() {
+
+  return (
+    <>
+      <Input/>
+    </>
+  )
+}
+
+export default App
